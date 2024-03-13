@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "AzureTest004"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": "DefaultEndpointsProtocol=https;AccountName=adfblobstorage001;EndpointSuffix=core.windows.net;"
+		},
+		"Ds_sqldb_connectionString": {
+			"value": ""
+		},
+		"Ds_sqltable_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=azuresqldatabase001.database.windows.net;Initial Catalog=azuresqldatabase001;User ID=yogi"
+		},
+		"LS_ADLSConnection_accountKey": {
+			"value": ""
+		},
+		"LS_ADLSTestconnection_accountKey": {
+			"value": ""
+		},
+		"LS_BlobConnection_connectionString": {
+			"value": ""
+		},
+		"LS_ADLSConnection_properties_typeProperties_url": {
+			"value": "https://adf200adlstore.dfs.core.windows.net/"
+		},
+		"LS_ADLSTestconnection_properties_typeProperties_url": {
+			"value": "https://adf200adlstore.dfs.core.windows.net/"
+		},
+		"LS_HttpConnection_properties_typeProperties_url": {
+			"value": "@{linkedService().baseURL}"
+		},
+		"LS_keyvault_properties_typeProperties_baseUrl": {
+			"value": "https://adfkeyvaulttest001.vault.azure.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

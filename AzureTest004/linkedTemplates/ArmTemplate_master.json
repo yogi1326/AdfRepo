@@ -1,0 +1,154 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "AzureTest004"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'",
+			"defaultValue": "DefaultEndpointsProtocol=https;AccountName=adfblobstorage001;EndpointSuffix=core.windows.net;"
+		},
+		"Ds_sqldb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Ds_sqldb'"
+		},
+		"Ds_sqltable_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Ds_sqltable'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=azuresqldatabase001.database.windows.net;Initial Catalog=azuresqldatabase001;User ID=yogi"
+		},
+		"LS_ADLSConnection_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLSConnection'"
+		},
+		"LS_ADLSTestconnection_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLSTestconnection'"
+		},
+		"LS_BlobConnection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BlobConnection'"
+		},
+		"LS_ADLSConnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adf200adlstore.dfs.core.windows.net/"
+		},
+		"LS_ADLSTestconnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adf200adlstore.dfs.core.windows.net/"
+		},
+		"LS_HttpConnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().baseURL}"
+		},
+		"LS_keyvault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://adfkeyvaulttest001.vault.azure.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "AzureTest004_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Ds_sqldb_connectionString": {
+						"value": "[parameters('Ds_sqldb_connectionString')]"
+					},
+					"LS_ADLSConnection_accountKey": {
+						"value": "[parameters('LS_ADLSConnection_accountKey')]"
+					},
+					"LS_ADLSTestconnection_accountKey": {
+						"value": "[parameters('LS_ADLSTestconnection_accountKey')]"
+					},
+					"LS_BlobConnection_connectionString": {
+						"value": "[parameters('LS_BlobConnection_connectionString')]"
+					},
+					"LS_ADLSConnection_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLSConnection_properties_typeProperties_url')]"
+					},
+					"LS_ADLSTestconnection_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLSTestconnection_properties_typeProperties_url')]"
+					},
+					"LS_HttpConnection_properties_typeProperties_url": {
+						"value": "[parameters('LS_HttpConnection_properties_typeProperties_url')]"
+					},
+					"LS_keyvault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('LS_keyvault_properties_typeProperties_baseUrl')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "AzureTest004_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"Ds_sqltable_connectionString": {
+						"value": "[parameters('Ds_sqltable_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'AzureTest004_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "AzureTest004_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'AzureTest004_ArmTemplate_1')]"
+			]
+		}
+	]
+}
