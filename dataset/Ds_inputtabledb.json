@@ -1,0 +1,31 @@
+{
+	"name": "Ds_inputtabledb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ds_sqltable",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Table_Schema": {
+				"type": "string"
+			},
+			"Table_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().Table_Schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().Table_name",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

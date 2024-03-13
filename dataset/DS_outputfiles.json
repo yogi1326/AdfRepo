@@ -1,0 +1,33 @@
+{
+	"name": "DS_outputfiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSConnection",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SinkFilename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().SinkFilename",
+					"type": "Expression"
+				},
+				"folderPath": "outputfiles",
+				"fileSystem": "refined"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
