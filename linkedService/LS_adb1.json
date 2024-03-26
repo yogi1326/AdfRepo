@@ -1,0 +1,25 @@
+{
+	"name": "LS_adb1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-3000556960735170.10.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/8059b31d-72ad-4769-9a81-f9a2cca8c9b3/resourceGroups/TestRG/providers/Microsoft.Databricks/workspaces/AzureDataBricks",
+			"newClusterNodeType": "Standard_DS4_v2",
+			"newClusterNumOfWorker": "2:4",
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "10.4.x-cpu-ml-scala2.12",
+			"clusterOption": "Autoscaling",
+			"newClusterInitScripts": []
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

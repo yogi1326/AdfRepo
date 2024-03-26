@@ -15,6 +15,12 @@
 					"referenceName": "PL_SQL_TO_ADLS",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "PL_Run_dataFlow",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
